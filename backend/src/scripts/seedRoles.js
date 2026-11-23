@@ -8,10 +8,10 @@ const run = async () => {
 
   const idByKey = {};
   for (const key of ALL_PERMISSIONS) {
-    const doc = await Permission.findOneAndUpdate(
+        const doc = await Permission.findOneAndUpdate(
       { key },
       { key, group: key.split(":")[0] },
-      { upsert: true, new: true }
+      { upsert: true, returnDocument: "after" }
     );
     idByKey[key] = doc._id;
   }
