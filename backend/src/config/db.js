@@ -1,21 +1,28 @@
-
 import mongoose from "mongoose";
 import { env } from "./env.js";
 
+mongoose.set("strictQuery", true);
+
 export const connectDB = async () => {
-  try {
-    const connection = await mongoose.connect(env.mongoUri, {
-      autoIndex: env.nodeEnv !== "production",
-      serverSelectionTimeoutMS: 10000,
-    });
+  mongoose.connection.on("disconnected", () =>
+    console.warn("MongoDB disconnected")
+  );
+  mongoose.connection.on("reconnected", () =>
+    console.log("MongoDB reconnected")
+  );
+  mongoose.connection.on("error", (err) =>
+    console.error("MongoDB error:", err.message)
+  );
 
-    console.info(
-      `MongoDB connected successfully: ${connection.connection.host}`
-    );
+  await mongoose.connect(env.mongoUri, {
+    serverSelectionTimeoutMS: 8000,
+    maxPoolSize: 10,
+  });
 
-    return connection;
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-    throw error;
-  }
+  console.log(`MongoDB connected: ${mongoose.connection.host}/${mongoose.connection.name}`);
+};
+
+export const disconnectDB = async () => {
+  await mongoose.connection.close();
+  console.log("MongoDB connection closed");
 };

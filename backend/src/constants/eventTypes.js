@@ -1,0 +1,15 @@
+export const EVENTS = {
+  LOGIN_SUCCESS: "login_success",
+  LOGIN_FAILED: "login_failed",
+  LOGOUT: "logout",
+  PASSWORD_CHANGE: "password_change",
+  EMAIL_CHANGE: "email_change",
+  PROFILE_UPDATE: "profile_update",
+  BLOG_CREATE: "blog_create",
+  BLOG_EDIT: "blog_edit",
+  BLOG_DELETE: "blog_delete",
+  COMMENT_CREATE: "comment_create",
+  ACCOUNT_SUSPENDED: "account_suspended",
+  ACCOUNT_RECOVERY: "account_recovery",
+  SESSION_TERMINATED: "session_terminated",
+};
