@@ -1,5 +1,6 @@
 import { Router } from "express";
 import mongoose from "mongoose";
+import authRoutes from "./auth.routes.js";
 
 const router = Router();
 
@@ -13,6 +14,6 @@ router.get("/health", (req, res) => {
   });
 });
 
-// Later phases mount here, e.g. router.use("/auth", authRoutes);
+router.use("/auth", authRoutes);
 
 export default router;

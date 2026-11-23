@@ -1,9 +1,13 @@
 
 export const EVENTS = {
+  REGISTER: "register",
+  EMAIL_VERIFIED: "email_verified",
   LOGIN_SUCCESS: "login_success",
   LOGIN_FAILED: "login_failed",
   LOGOUT: "logout",
+  LOGOUT_ALL: "logout_all",
   PASSWORD_CHANGE: "password_change",
+  PASSWORD_RESET_REQUEST: "password_reset_request",
   EMAIL_CHANGE: "email_change",
   PROFILE_UPDATE: "profile_update",
   BLOG_CREATE: "blog_create",
@@ -13,6 +17,7 @@ export const EVENTS = {
   ACCOUNT_SUSPENDED: "account_suspended",
   ACCOUNT_RECOVERY: "account_recovery",
   SESSION_TERMINATED: "session_terminated",
+  TOKEN_REUSE_DETECTED: "token_reuse_detected",
 };
 
 export const NOTIFICATION_TYPES = {
