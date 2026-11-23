@@ -39,4 +39,10 @@ export const env = {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  retention: {
+    activityDays: Number(process.env.ACTIVITY_RETENTION_DAYS) || 180,
+    loginHistoryDays: Number(process.env.LOGIN_HISTORY_RETENTION_DAYS) || 365,
+    locationDays: Number(process.env.LOCATION_RETENTION_DAYS) || 90,
+    notificationDays: Number(process.env.NOTIFICATION_RETENTION_DAYS) || 90,
+  },
 };
