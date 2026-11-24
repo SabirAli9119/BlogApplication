@@ -10,7 +10,10 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "seed:roles": "node src/scripts/seedRoles.js",
     "check:models": "node src/scripts/modelCheck.js",
-    "check:auth": "node src/scripts/authCheck.js"
+    "check:auth": "node src/scripts/authCheck.js",
+    "seed:categories": "node src/scripts/seedCategories.js",
+    "create:admin": "node src/scripts/createAdmin.js",
+    "check:blogs": "node src/scripts/blogCheck.js"
   },
   "keywords": [],
   "author": "",

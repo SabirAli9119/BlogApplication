@@ -54,5 +54,5 @@ const preferenceSchema = new Schema(
   },
   { timestamps: true }
 );
-
+preferenceSchema.index({ "privacy.profileVisibility": 1 });
 export default mongoose.model("UserPreference", preferenceSchema);
