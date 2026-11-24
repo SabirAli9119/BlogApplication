@@ -16,5 +16,5 @@ const commentSchema = new Schema(
 
 commentSchema.index({ blog: 1, parent: 1, createdAt: -1 });
 commentSchema.index({ author: 1, createdAt: -1 });
-
+commentSchema.index({ parent: 1, createdAt: 1 }); // fast "replies of a comment"
 export default mongoose.model("Comment", commentSchema);

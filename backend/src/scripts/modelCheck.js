@@ -22,7 +22,7 @@ const run = async () => {
   try {
     const models = Object.values(M);
     for (const model of models) await model.syncIndexes();
-    check(models.length === 19, `${models.length} models loaded and indexes synced`);
+    check(models.length ===20, `${models.length} models loaded and indexes synced`);
 
     user = await M.User.create({
       firstName: "Test", lastName: "User", username: `test_${tag}`,

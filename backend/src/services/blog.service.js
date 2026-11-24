@@ -4,13 +4,13 @@ import { ACCOUNT_STATUS } from "../constants/roles.js";
 import { getPagination, buildMeta } from "../utils/pagination.js";
 
 // Only the fields a blog CARD needs. Never the full content, never private author data.
-const CARD_FIELDS =
+export const CARD_FIELDS =
   "title slug description coverImage.url author categories tags readingTime publishedAt likesCount commentsCount views isFeatured";
-const CARD_PROJECTION = {
+export const CARD_PROJECTION = {
   title: 1, slug: 1, description: 1, "coverImage.url": 1, author: 1, categories: 1, tags: 1,
   readingTime: 1, publishedAt: 1, likesCount: 1, commentsCount: 1, views: 1, isFeatured: 1,
 };
-const POPULATE = [
+export const POPULATE = [
   { path: "author", select: "username firstName lastName avatar.url headline isVerifiedBadge" },
   { path: "categories", select: "name slug" },
 ];
@@ -38,7 +38,7 @@ export const getHiddenAuthorIds = async (viewerId) => {
 const resolveHidden = (hidden, viewerId) => hidden ?? getHiddenAuthorIds(viewerId);
 
 // The one definition of "publicly visible".
-const publicFilter = (hidden) => ({
+export const publicFilter = (hidden) => ({
   status: BLOG_STATUS.PUBLISHED,
   deletedAt: { $exists: false },
   publishedAt: { $lte: new Date() },

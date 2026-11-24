@@ -17,3 +17,4 @@ export { default as UserLocation } from "./UserLocation.js";
 export { default as PasswordResetToken } from "./PasswordResetToken.js";
 export { default as Role } from "./Role.js";
 export { default as Permission } from "./Permission.js";
+export { default as BlogView } from "./BlogView.js";

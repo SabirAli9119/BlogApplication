@@ -2,6 +2,9 @@ import { Router } from "express";
 import mongoose from "mongoose";
 import authRoutes from "./auth.routes.js";
 import blogRoutes from "./blog.routes.js";
+import blogDetailRoutes from "./blogDetail.routes.js";
+import commentRoutes from "./comment.routes.js";
+import bookmarkRoutes from "./bookmark.routes.js";
 import categoryRoutes from "./category.routes.js";
 import { optionalAuth } from "../middleware/optionalAuth.middleware.js";
 import { home } from "../controllers/blog.controller.js";
@@ -19,7 +22,10 @@ router.get("/health", (req, res) => {
 });
 
 router.use("/auth", authRoutes);
-router.use("/blogs", blogRoutes);
+router.use("/blogs", blogRoutes); // fixed paths first: /mine, /trending, ...
+router.use("/blogs", blogDetailRoutes); // then /:slug, /:id/comments, /:id/like, ...
+router.use("/comments", commentRoutes);
+router.use("/bookmarks", bookmarkRoutes);
 router.use("/categories", categoryRoutes);
 router.get("/home", optionalAuth, home);
 
