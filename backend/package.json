@@ -13,7 +13,8 @@
     "check:auth": "node src/scripts/authCheck.js",
     "seed:categories": "node src/scripts/seedCategories.js",
     "create:admin": "node src/scripts/createAdmin.js",
-    "check:blogs": "node src/scripts/blogCheck.js"
+    "check:blogs": "node src/scripts/blogCheck.js",
+    "check:crud": "node src/scripts/crudCheck.js"
   },
   "keywords": [],
   "author": "",
