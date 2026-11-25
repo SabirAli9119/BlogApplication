@@ -1,9 +1,11 @@
 import crypto from "crypto";
-import { Blog, Like, Bookmark, ReadingHistory, UserPreference, BlogView } from "../models/index.js";
+// import { Blog, Like, Bookmark, ReadingHistory, UserPreference, BlogView } from "../models/index.js";
+import { Blog, Like, Bookmark, ReadingHistory, UserPreference, BlogView, BlogDailyView } from "../models/index.js";
 import { BLOG_STATUS } from "../constants/eventTypes.js";
 import { ACCOUNT_STATUS } from "../constants/roles.js";
 import { env } from "../config/env.js";
 import { ApiError } from "../utils/ApiError.js";
+import { startOfUtcDay } from "../utils/dates.js";
 import { getHiddenAuthorIds, publicFilter, CARD_FIELDS, POPULATE } from "./blog.service.js";
 
 const AUTHOR_SELECT = "username firstName lastName avatar.url headline bio isVerifiedBadge followersCount status deletedAt";
@@ -55,7 +57,12 @@ const recordView = async ({ blog, viewerId, ip, userAgent }) => {
     if (err.code === 11000) return false;
     throw err;
   }
-  await Blog.updateOne({ _id: blog._id }, { $inc: { views: 1 } });
+    await Blog.updateOne({ _id: blog._id }, { $inc: { views: 1 } });
+  await BlogDailyView.updateOne(
+    { blog: blog._id, day: startOfUtcDay() },
+    { $inc: { views: 1 }, $setOnInsert: { author: blog.author._id } },
+    { upsert: true }
+  );
   return true;
 };
 
