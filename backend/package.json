@@ -15,7 +15,8 @@
     "create:admin": "node src/scripts/createAdmin.js",
     "check:blogs": "node src/scripts/blogCheck.js",
     "check:crud": "node src/scripts/crudCheck.js",
-    "check:social": "node src/scripts/socialCheck.js"
+    "check:social": "node src/scripts/socialCheck.js",
+    "check:users": "node src/scripts/userCheck.js"
   },
   "keywords": [],
   "author": "",

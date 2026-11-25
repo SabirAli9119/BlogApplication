@@ -17,3 +17,4 @@ export const usernameCheckLimiter = make(60 * 1000, 60, "Too many username check
 export const blogCreateLimiter = make(60 * 60 * 1000, 30, "You're creating posts too quickly, please try again later");
 export const uploadLimiter = make(60 * 60 * 1000, 60, "Too many uploads, please try again later");
 export const commentLimiter = make(60 * 60 * 1000, 60, "You're commenting too quickly, please try again later");
+export const followLimiter = make(60 * 60 * 1000, 60, "You're following people too quickly, please try again later");

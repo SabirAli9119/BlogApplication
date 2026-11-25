@@ -1,6 +1,7 @@
 import { Router } from "express";
 import mongoose from "mongoose";
 import authRoutes from "./auth.routes.js";
+import userRoutes from "./user.routes.js";
 import blogRoutes from "./blog.routes.js";
 import blogDetailRoutes from "./blogDetail.routes.js";
 import commentRoutes from "./comment.routes.js";
@@ -22,6 +23,7 @@ router.get("/health", (req, res) => {
 });
 
 router.use("/auth", authRoutes);
+router.use("/users", userRoutes);
 router.use("/blogs", blogRoutes); // fixed paths first: /mine, /trending, ...
 router.use("/blogs", blogDetailRoutes); // then /:slug, /:id/comments, /:id/like, ...
 router.use("/comments", commentRoutes);

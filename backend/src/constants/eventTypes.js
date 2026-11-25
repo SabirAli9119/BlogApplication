@@ -18,6 +18,7 @@ export const EVENTS = {
   ACCOUNT_RECOVERY: "account_recovery",
   SESSION_TERMINATED: "session_terminated",
   TOKEN_REUSE_DETECTED: "token_reuse_detected",
+  ACCOUNT_DELETED: "account_deleted",
 };
 
 export const NOTIFICATION_TYPES = {
