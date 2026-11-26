@@ -1,7 +1,8 @@
 import { connectDB, disconnectDB } from "../config/db.js";
 import { Role, Permission } from "../models/index.js";
 import { ROLES } from "../constants/roles.js";
-import { ALL_PERMISSIONS, DEFAULT_ADMIN_PERMISSIONS } from "../constants/permissions.js";
+// import { ALL_PERMISSIONS, DEFAULT_ADMIN_PERMISSIONS } from "../constants/permissions.js";
+import { ALL_PERMISSIONS, DEFAULT_ADMIN_PERMISSIONS, PERMISSION_DESCRIPTIONS } from "../constants/permissions.js";
 
 const run = async () => {
   await connectDB();
@@ -10,7 +11,7 @@ const run = async () => {
   for (const key of ALL_PERMISSIONS) {
     const doc = await Permission.findOneAndUpdate(
       { key },
-      { key, group: key.split(":")[0] },
+      { key, group: key.split(":")[0], description: PERMISSION_DESCRIPTIONS[key] || "" },
       { upsert: true, returnDocument: "after" }
     );
     idByKey[key] = doc._id;

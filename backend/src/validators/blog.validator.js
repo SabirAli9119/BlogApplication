@@ -37,7 +37,7 @@ const tagRule = z
   .transform((s) => s.replace(/[\s_]+/g, "-"));
 
 // Only these fields can ever be set by the client. Everything else is stripped.
-const postFields = {
+export const postFields = {
   title: z.string().trim().max(150, "Title is too long (max 150 characters)").optional(),
   description: z.string().trim().max(300, "Description is too long (max 300 characters)").optional(),
   content: z.string().max(300000, "Post is too long").optional(),

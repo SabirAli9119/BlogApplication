@@ -15,7 +15,8 @@ const PREFERENCE_BY_TYPE = {
 
 export const createNotification = async ({ recipient, sender, type, message, resource }) => {
   try {
-    return await Notification.create({ recipient, sender, type, message, resource });
+    // return await Notification.create({ recipient, sender, type, message, resource });
+    return await Notification.create({ recipient, sender, type, message: shorten(message, 300), resource });
   } catch (err) {
     console.error("Notification failed:", err.message);
     return null;

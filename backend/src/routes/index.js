@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import authRoutes from "./auth.routes.js";
 import userRoutes from "./user.routes.js";
 import adminRoutes from "./admin.routes.js";
+import reportRoutes from "./report.routes.js";
 import dashboardRoutes from "./dashboard.routes.js";
 import blogRoutes from "./blog.routes.js";
 import blogDetailRoutes from "./blogDetail.routes.js";
@@ -27,6 +28,7 @@ router.get("/health", (req, res) => {
 router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
 router.use("/admin", adminRoutes);
+router.use("/reports", reportRoutes);
 router.use("/dashboard", dashboardRoutes);
 router.use("/blogs", blogRoutes); // fixed paths first: /mine, /trending, ...
 router.use("/blogs", blogDetailRoutes); // then /:slug, /:id/comments, /:id/like, ...

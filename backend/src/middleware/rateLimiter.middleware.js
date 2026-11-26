@@ -18,3 +18,4 @@ export const blogCreateLimiter = make(60 * 60 * 1000, 30, "You're creating posts
 export const uploadLimiter = make(60 * 60 * 1000, 60, "Too many uploads, please try again later");
 export const commentLimiter = make(60 * 60 * 1000, 60, "You're commenting too quickly, please try again later");
 export const followLimiter = make(60 * 60 * 1000, 60, "You're following people too quickly, please try again later");
+export const reportLimiter = make(60 * 60 * 1000, 20, "You're sending reports too quickly, please try again later");

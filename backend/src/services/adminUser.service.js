@@ -12,7 +12,7 @@ import { recordAudit } from "./audit.service.js";
 import { revokeAllSessions } from "./session.service.js";
 import { logActivity } from "./activity.service.js";
 import { createNotification } from "./notification.service.js";
-import { sendSecurityAlertEmail } from "./email.service.js";
+import { sendSecurityAlertEmail, sendModerationEmail } from "./email.service.js";
 
 const RANK = { [ROLES.USER]: 0, [ROLES.ADMIN]: 1, [ROLES.SUPER_ADMIN]: 2 };
 const FIVE_YEARS_MS = 5 * 365 * 24 * 60 * 60 * 1000;
@@ -80,7 +80,8 @@ const assertCanManage = (admin, target) => {
 // notification in the app + an email, so the user always knows
 const tell = async (target, message, type = NOTIFICATION_TYPES.MODERATION) => {
   await createNotification({ recipient: target._id, type, message });
-  await sendSecurityAlertEmail(target, message);
+  const sendEmail = type === NOTIFICATION_TYPES.SECURITY_ALERT ? sendSecurityAlertEmail : sendModerationEmail;
+  await sendEmail(target, message);
 };
 
 /* ---------- search ---------- */
@@ -284,9 +285,9 @@ export const changeStatus = async ({ admin, req, id, status, reason, until }) =>
   const update = active
     ? { $set: { status }, $unset: { statusUntil: "", statusReason: "" } }
     : {
-        $set: { status, statusReason: cleanReason, ...(when && { statusUntil: when }) },
-        ...(!when && { $unset: { statusUntil: "" } }),
-      };
+      $set: { status, statusReason: cleanReason, ...(when && { statusUntil: when }) },
+      ...(!when && { $unset: { statusUntil: "" } }),
+    };
 
   // only applies if nobody changed this account in the meantime
   const updated = await User.findOneAndUpdate({ _id: target._id, status: target.status }, update, { returnDocument: "after" })

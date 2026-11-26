@@ -30,7 +30,7 @@ const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /* ---------- helpers ---------- */
 
 // Removed by a moderator, or unpublished by a moderator: the author can't bring it back.
-const isModerationLocked = (blog) =>
+export const isModerationLocked = (blog) =>
   blog.status === BLOG_STATUS.REMOVED ||
   (blog.status === BLOG_STATUS.UNPUBLISHED && Boolean(blog.moderation?.by));
 
@@ -66,7 +66,7 @@ const validateCategories = async (ids = []) => {
 };
 
 // Only whitelisted fields get here (the validator strips the rest). Everything is cleaned.
-const buildFieldUpdates = async (input) => {
+export const buildFieldUpdates = async (input) => {
   const set = {};
   if (input.title !== undefined) set.title = toPlainText(input.title) || PLACEHOLDER_TITLE;
   if (input.description !== undefined) set.description = toPlainText(input.description);

@@ -18,7 +18,9 @@
     "check:social": "node src/scripts/socialCheck.js",
     "check:users": "node src/scripts/userCheck.js",
     "check:dashboard": "node src/scripts/dashboardCheck.js",
-    "check:admin": "node src/scripts/adminCheck.js"
+    "check:admin": "node src/scripts/adminCheck.js",
+    "check:content": "node src/scripts/contentCheck.js",
+    "check:reports": "node src/scripts/reportsCheck.js"
   },
   "keywords": [],
   "author": "",

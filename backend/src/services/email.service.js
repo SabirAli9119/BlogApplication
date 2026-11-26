@@ -3,11 +3,11 @@ import { env } from "../config/env.js";
 
 const transporter = env.smtp.host
   ? nodemailer.createTransport({
-      host: env.smtp.host,
-      port: env.smtp.port,
-      secure: env.smtp.port === 465,
-      auth: env.smtp.user ? { user: env.smtp.user, pass: env.smtp.pass } : undefined,
-    })
+    host: env.smtp.host,
+    port: env.smtp.port,
+    secure: env.smtp.port === 465,
+    auth: env.smtp.user ? { user: env.smtp.user, pass: env.smtp.pass } : undefined,
+  })
   : null;
 
 // An email failure must never break registration or login, so we log and move on.
@@ -43,4 +43,11 @@ export const sendSecurityAlertEmail = (user, message) =>
     to: user.email,
     subject: "Blogify security alert",
     text: `Hi ${user.firstName},\n\n${message}\n\nIf this wasn't you, reset your password and sign out of all devices from your security settings.`,
+  });
+
+export const sendModerationEmail = (user, message) =>
+  send({
+    to: user.email,
+    subject: "An update about your Blogify account or content",
+    text: `Hi ${user.firstName},\n\n${message}\n\nIf you have questions, reply from your Blogify account or contact support.`,
   });
