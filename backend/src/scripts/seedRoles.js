@@ -8,29 +8,41 @@ const run = async () => {
 
   const idByKey = {};
   for (const key of ALL_PERMISSIONS) {
-        const doc = await Permission.findOneAndUpdate(
+    const doc = await Permission.findOneAndUpdate(
       { key },
       { key, group: key.split(":")[0] },
       { upsert: true, returnDocument: "after" }
     );
     idByKey[key] = doc._id;
   }
+  const ids = (keys) => keys.map((key) => idByKey[key]);
 
-  const roles = [
-    { name: ROLES.USER, displayName: "User", keys: [] },
-    { name: ROLES.ADMIN, displayName: "Admin", keys: DEFAULT_ADMIN_PERMISSIONS },
-    { name: ROLES.SUPER_ADMIN, displayName: "Super Admin", keys: ALL_PERMISSIONS },
-  ];
+  // User: no admin permissions
+  await Role.updateOne(
+    { name: ROLES.USER },
+    { $setOnInsert: { displayName: "User", isSystem: true, permissions: [] } },
+    { upsert: true }
+  );
+  // Admin: only GAINS missing default permissions, anything granted on top is kept
+  await Role.updateOne(
+    { name: ROLES.ADMIN },
+    {
+      $setOnInsert: { displayName: "Admin", isSystem: true },
+      $addToSet: { permissions: { $each: ids(DEFAULT_ADMIN_PERMISSIONS) } },
+    },
+    { upsert: true }
+  );
+  // Super Admin: always everything
+  await Role.updateOne(
+    { name: ROLES.SUPER_ADMIN },
+    {
+      $setOnInsert: { displayName: "Super Admin", isSystem: true },
+      $set: { permissions: ids(ALL_PERMISSIONS) },
+    },
+    { upsert: true }
+  );
 
-  for (const r of roles) {
-    await Role.findOneAndUpdate(
-      { name: r.name },
-      { name: r.name, displayName: r.displayName, permissions: r.keys.map((k) => idByKey[k]), isSystem: true },
-      { upsert: true }
-    );
-  }
-
-  console.log(`Seeded ${ALL_PERMISSIONS.length} permissions and ${roles.length} roles`);
+  console.log(`Seeded ${ALL_PERMISSIONS.length} permissions and 3 roles`);
   await disconnectDB();
 };
 

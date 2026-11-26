@@ -2,6 +2,9 @@ export const PERMISSIONS = {
   USERS_VIEW: "users:view",
   USERS_SUSPEND: "users:suspend",
   USERS_BAN: "users:ban",
+  USERS_VERIFY: "users:verify",
+  USERS_RESTRICT: "users:restrict",
+  USERS_RESTORE: "users:restore",
   USERS_MANAGE_ROLES: "users:manage_roles",
   USERS_REVOKE_SESSIONS: "users:revoke_sessions",
   USERS_VIEW_LOCATION: "users:view_location",
@@ -24,13 +27,15 @@ export const PERMISSIONS = {
 
 export const ALL_PERMISSIONS = Object.values(PERMISSIONS);
 
-// Default permissions for a regular Admin (Super Admin gets everything)
+// What a regular Admin gets by default (Super Admin always gets everything)
 export const DEFAULT_ADMIN_PERMISSIONS = [
   PERMISSIONS.USERS_VIEW,
   PERMISSIONS.USERS_SUSPEND,
+  PERMISSIONS.USERS_RESTRICT,
   PERMISSIONS.BLOGS_VIEW_ALL,
   PERMISSIONS.BLOGS_EDIT_ANY,
   PERMISSIONS.BLOGS_DELETE_ANY,
   PERMISSIONS.REPORTS_VIEW,
   PERMISSIONS.REPORTS_RESOLVE,
+  PERMISSIONS.ANALYTICS_VIEW,
 ];

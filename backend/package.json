@@ -17,7 +17,8 @@
     "check:crud": "node src/scripts/crudCheck.js",
     "check:social": "node src/scripts/socialCheck.js",
     "check:users": "node src/scripts/userCheck.js",
-    "check:dashboard": "node src/scripts/dashboardCheck.js"
+    "check:dashboard": "node src/scripts/dashboardCheck.js",
+    "check:admin": "node src/scripts/adminCheck.js"
   },
   "keywords": [],
   "author": "",
